@@ -1,6 +1,8 @@
 import './css/styles.css';
 
-//biblioteki//
+//biblioteki// notiflix // lodash //
+import debounce from 'lodash.debounce';
+import Notiflix from 'notiflix';
 
 import { fetchCountries } from './fetchCountries';
 
@@ -19,8 +21,8 @@ const divEl = document.querySelector('.country-info')
 
 
 // inputEl.addEventListener('input', e => {
-    function searchingCountryInfo () { 
-    const searchCountries = e.currentTarget.value.trim();
+function searchingCountryInfo () { 
+    const searchCountries = e.currentTarget.value.trim(); //target//
     listEl.innerHTML ='';
 
     // if (searchCountries !== '') {
