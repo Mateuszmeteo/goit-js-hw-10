@@ -18,16 +18,15 @@ const divEl = document.querySelector('.country-info')
 
 
 
-inputEl.addEventListener('input', e => {
+// inputEl.addEventListener('input', e => {
+    function searchingCountryInfo () { 
     const searchCountries = e.currentTarget.value.trim();
     listEl.innerHTML ='';
 
-    if (searchCountries !== '') {
+    // if (searchCountries !== '') {
         fetchCountries(searchCountries)
         .then(data => {
-            if (searchCountries >= 2) {
-
-                function renderList (elements) {
+            if (data.length >= 20) { 
             const markup = elements
             .map((element) => {
                 return 
@@ -37,7 +36,7 @@ inputEl.addEventListener('input', e => {
             })
             .join("")
             listEl.innerHTML = markup;
-        }
+        
             }
             else if (searchCountries >=2 && searchCountries <=10) {
                 console.log('ghghghgg')
@@ -48,9 +47,9 @@ inputEl.addEventListener('input', e => {
             alert('kkjljll')
         })
     }
-})
+// }
 
-
+inputEl.addEventListener('input', searchingCountryInfo)
 
 
 
