@@ -18,25 +18,64 @@ const divEl = document.querySelector('.country-info')
 
 
 
-// const markupInfo
+inputEl.addEventListener('input', e => {
+    const searchCountries = e.currentTarget.value.trim();
+    listEl.innerHTML ='';
 
+    if (searchCountries !== '') {
+        fetchCountries(searchCountries)
+        .then(data => {
+            if (searchCountries >= 2) {
 
-const addElList = e => {
-    const countriesSearch = e.target.value.trim();
+                function renderList (elements) {
+            const markup = elements
+            .map((element) => {
+                return 
+                `<li>${element.name.official}
+                ${element.flags.svg}
+                </li>`
+            })
+            .join("")
+            listEl.innerHTML = markup;
+        }
+            }
+            else if (searchCountries >=2 && searchCountries <=10) {
+                console.log('ghghghgg')
+            }
 
-    const markupList = `<li>${inputEl.value}</li>`
-    listEl.innerHTML = 'lll';
-
-    if (countriesSearch !== '') {
-        // fetchCountries.map 
-
-
+        })
+        .catch(error => {
+            alert('kkjljll')
+        })
     }
-}
+})
 
 
 
-inputEl.addEventListener('input', addElList)
+
+
+
+
+
+// const markupInfo
+// {name.official, capital, population, flags, languages}
+
+// const addElList = e => {
+//     const countriesSearch = e.target.value.trim();
+
+//     const markupList = `<li>${inputEl.value}</li>`
+//     listEl.innerHTML = 'lll';
+
+//     if (countriesSearch !== '') {
+//         // fetchCountries.map 
+
+
+//     }
+// }
+
+
+
+// inputEl.addEventListener('input', addElList)
 
 
 // const listInfo
