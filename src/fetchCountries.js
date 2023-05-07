@@ -5,20 +5,39 @@
 // export named ///
 
 
+const API_URL = "https://restcountries.com/v3.1/name/"
 
+export { fetchCountries};
 
 const fetchCountries = (name) => {
-// function fetchCountries(name) {
-    return fetch("https://restcountries.com/v3.1/name/{name}?fields=name,capital,population,flags,languages")
-    .then((response) => {
-        if(!response.ok) {
-            throw new Error(response.status);
+    return fetch(
+        `${API_URL}/${name}?fields=name,capital,population,flags,languages`
+    ).then((res) => {
+        if (res.ok) {
+            return res.json();
         }
-        return response.json();
+        if (!res.ok) {
+            throw new Error(res.status);
+        }
     })
 }
 
-export { fetchCountries};
+
+
+
+
+// const fetchCountries = (name) => {
+// // function fetchCountries(name) {
+//     return fetch("https://restcountries.com/v3.1/name/{name}?fields=name,capital,population,flags,languages")
+//     .then((response) => {
+//         if(!response.ok) {
+//             throw new Error(response.status);
+//         }
+//         return response.json();
+//     })
+// }
+
+// export { fetchCountries};
 
 
 

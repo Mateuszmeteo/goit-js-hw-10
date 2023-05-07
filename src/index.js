@@ -18,40 +18,77 @@ const divEl = document.querySelector('.country-info')
 
 
 
+const searchCountryFunction = e => {
+    const searchCountries = e.currentTarget.value.trim();
+    listEl.innerHTML = '';
 
-
-// inputEl.addEventListener('input', e => {
-function searchingCountryInfo () { 
-    const searchCountries = e.currentTarget.value.trim(); //target//
-    listEl.innerHTML ='';
-
-    // if (searchCountries !== '') {
-        fetchCountries(searchCountries)
+    if (searchCountries !== '') {
+      fetchCountries(searchCountries)
         .then(data => {
-            if (data.length >= 20) { 
-            const markup = elements
-            .map((element) => {
-                return 
-                `<li>${element.name.official}
-                ${element.flags.svg}
-                </li>`
-            })
-            .join("")
-            listEl.innerHTML = markup;
-        
+            if (2 <= data.length && data.length <= 10) {
+              const listCountry = data
+                .map(({name, flag}) => 
+                    `<li>test ${name}, ${flag}</li>`)
+                .join('');
+              listEl.innerHTML(listCountry)
             }
-            else if (searchCountries >=2 && searchCountries <=10) {
-                console.log('ghghghgg')
+            if (data.length > 10) {
+                alert('max elements')
             }
+            if (data.length === 1) {
+              const listInfo = data
+                .map(country => 
+                    `<h2>info</h2>
+                     <p>1</p>
+                     <p>1</p>
+                     <p>1</p>`)
+                .join('');
+              listEl.innerHTML(listInfo)
 
+            }
         })
-        .catch(error => {
-            alert('kkjljll')
-        })
+        .catch(err => {alert('test')})
     }
-// }
+}
 
-inputEl.addEventListener('input', searchingCountryInfo)
+
+inputEl.addEventListener('input', searchCountryFunction)
+
+
+
+
+// // inputEl.addEventListener('input', e => {
+// function searchingCountryInfo () { 
+//     const searchCountries = e.currentTarget.value.trim(); //target//
+//     listEl.innerHTML ='';
+
+//     // if (searchCountries !== '') {
+//         fetchCountries(searchCountries)
+//         .then(data => {
+//             if (data.length >= 20) { 
+//             const markup = elements
+//             .map((element) => {
+//                 return 
+//                 `<li>${element.name.official}
+//                 ${element.flags.svg}
+//                 </li>`
+//             })
+//             .join("")
+//             listEl.innerHTML = markup;
+        
+//             }
+//             else if (searchCountries >=2 && searchCountries <=10) {
+//                 console.log('ghghghgg')
+//             }
+
+//         })
+//         .catch(error => {
+//             alert('kkjljll')
+//         })
+//     }
+// // }
+
+// inputEl.addEventListener('input', searchingCountryInfo)
 
 
 
