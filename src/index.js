@@ -16,43 +16,46 @@ const inputEl = document.getElementById('search-box')
 const listEl = document.querySelector('.country-list')
 const divEl = document.querySelector('.country-info')
 
+// const cleanInput = ref => (ref.innerHTML = '')
 
 
 const searchCountryFunction = e => {
-    const searchCountries = e.currentTarget.value.trim();
+    const searchCountries = e.Target.value.trim();
     listEl.innerHTML = '';
 
     if (searchCountries !== '') {
       fetchCountries(searchCountries)
         .then(data => {
-            if (2 <= data.length && data.length <= 10) {
+            if (2 >= data.length && data.length <= 10) {
               const listCountry = data
                 .map(({name, flag}) => 
-                    `<li>test ${name}, ${flag}</li>`)
+                    `<li>${flag} ${name}</li>`)
                 .join('');
               listEl.innerHTML(listCountry)
             }
-            if (data.length > 10) {
-                alert('max elements')
+            else if (data.length > 10) {
+                // alert('max elements')
+                Notiflix.Notify.info("Too many matches found. Please enter a more specific name.")
+                // cleanInput(listEl)
             }
-            if (data.length === 1) {
+            else if (data.length === 1) {
               const listInfo = data
-                .map(country => 
-                    `<h2>info</h2>
-                     <p>1</p>
-                     <p>1</p>
-                     <p>1</p>`)
+                .map(({name, flag, capital, population, languages}) => 
+                    `<h2>${flag} ${name}</h2>
+                     <p>Capital: ${capital}</p>
+                     <p>Population: ${population}</p>
+                     <p>Languages: ${languages}</p>`)
                 .join('');
-              listEl.innerHTML(listInfo)
+              divEl.innerHTML(listInfo)
 
             }
         })
-        .catch(err => {alert('test')})
+        .catch(err => {Notiflix.Notify.warning("Oops, there is no country with that name")})
     }
 }
 
 
-inputEl.addEventListener('input', searchCountryFunction)
+inputEl.addEventListener('input', debounce(searchCountryFunction, DEBOUNCE_DELAY))
 
 
 
