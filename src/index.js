@@ -20,7 +20,7 @@ const divEl = document.querySelector('.country-info')
 
 
 const searchCountryFunction = e => {
-    const searchCountries = e.Target.value.trim();
+    const searchCountries = e.target.value.trim();
     listEl.innerHTML = '';
 
     if (searchCountries !== '') {
@@ -58,6 +58,8 @@ const searchCountryFunction = e => {
 inputEl.addEventListener('input', debounce(searchCountryFunction, DEBOUNCE_DELAY))
 
 
+
+/////////////////...................................//////////////////////////////
 
 
 // // inputEl.addEventListener('input', e => {
@@ -161,3 +163,9 @@ inputEl.addEventListener('input', debounce(searchCountryFunction, DEBOUNCE_DELAY
 // inputEl.addEventListener('input', (e) => {
     
 // })
+
+
+////........................................///////////////////////...........///////////////////
+
+
+
