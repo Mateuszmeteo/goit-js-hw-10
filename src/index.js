@@ -18,7 +18,7 @@ const inputEl = document.getElementById('search-box')
 const listEl = document.querySelector('.country-list')
 const divEl = document.querySelector('.country-info')
 
-// const cleanInput = ref => (ref.innerHTML = '')
+const cleanInput = ref => (ref.innerHTML = '')
 
 
 const searchCountryFunction = e => {
@@ -30,29 +30,39 @@ const searchCountryFunction = e => {
 
         .then(data => {
           console.log(data)
-            if (2 >= data.length && data.length <= 10) {
-              const listCountry = data
-                .map(({name, flag}) => 
-                    `<li>${flag} ${name}</li>`)
+            if (data.length === 1) {
+              const listInfo = data
+                .map(({name, flags, capital, population, languages}) => 
+                    `<img src ="${flags.svg}" style: width = 80/> 
+                    <h2>${name.official}</h2>
+                    <p>Capital: ${capital}</p>
+                    <p>Population: ${population}</p>
+                    <p>Languages: ${Object.values(languages)}</p>`)
                 .join('');
-              listEl.innerHTML(listCountry)
+              divEl.innerHTML = listInfo 
+              // cleanInput(divEl)
             }
+            else if (data.length >=2  && data.length <= 10) {
+              const listCountry = data
+                .map(({name, flags}) => 
+                    `<li>
+                    <img src="${flags.svg}" style: width=40 /> 
+                    <h3>${name.official}</h3>
+                    </li>`)
+                .join('');
+                console.log(listCountry)
+                console.log(listEl)
+              listEl.innerHTML = listCountry
+              // cleanInput(listEl)
+            } 
             else if (data.length > 10) {
                 // alert('max elements')
                 Notiflix.Notify.info("Too many matches found. Please enter a more specific name.")
-                // cleanInput(listEl)
+                // cleanInput(listEl, divEl)
             }
-            else if (data.length === 1) {
-              const listInfo = data
-                .map(({name, flag, capital, population, languages}) => 
-                    `<h2>${flag} ${name}</h2>
-                     <p>Capital: ${capital}</p>
-                     <p>Population: ${population}</p>
-                     <p>Languages: ${languages}</p>`)
-                .join('');
-              divEl.innerHTML(listInfo)
+            
 
-            }
+          
         })
         .catch(err => {Notiflix.Notify.warning("Oops, there is no country with that name")})
     }
