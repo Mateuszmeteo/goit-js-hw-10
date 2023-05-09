@@ -18,7 +18,6 @@ const inputEl = document.getElementById('search-box')
 const listEl = document.querySelector('.country-list')
 const divEl = document.querySelector('.country-info')
 
-const cleanInput = ref => (ref.innerHTML = '')
 
 
 const searchCountryFunction = e => {
@@ -35,37 +34,33 @@ const searchCountryFunction = e => {
                 .map(({name, flags, capital, population, languages}) => 
                     `<img src ="${flags.svg}" style: width = 80/> 
                     <h2>${name.official}</h2>
-                    <p>Capital: ${capital}</p>
-                    <p>Population: ${population}</p>
-                    <p>Languages: ${Object.values(languages)}</p>`)
+                    <p><b>Capital:</b> ${capital}</p>
+                    <p><b>Population:</b> ${population}</p>
+                    <p><b>Languages:</b> ${Object.values(languages)}</p>`)
                 .join('');
               divEl.innerHTML = listInfo 
-              // cleanInput(divEl)
             }
             else if (data.length >=2  && data.length <= 10) {
               const listCountry = data
                 .map(({name, flags}) => 
                     `<li class="country-list-el">
-                    <img src="${flags.svg}" style: width=40 /> 
-                    <p>${name.official}</p>
+                    <img class="country-list-img" src="${flags.svg}"/> 
+                    <p><b>${name.official}</b></p>
                     </li>`)
                 .join('');
                 console.log(listCountry)
                 console.log(listEl)
               listEl.innerHTML = listCountry
-              // cleanInput(listEl)
             } 
             else if (data.length > 10) {
                 // alert('max elements')
                 Notiflix.Notify.info("Too many matches found. Please enter a more specific name.")
-                // cleanInput(listEl, divEl)
             }
-            
-
-          
         })
         .catch(err => {Notiflix.Notify.warning("Oops, there is no country with that name")})
     }
+    divEl.innerHTML = '';
+    listEl.innerHTML = '';
 }
 
 
