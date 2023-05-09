@@ -32,8 +32,8 @@ const searchCountryFunction = e => {
             if (data.length === 1) {
               const listInfo = data
                 .map(({name, flags, capital, population, languages}) => 
-                    `<img src ="${flags.svg}" style: width = 80/> 
-                    <h2>${name.official}</h2>
+                    `<h2 class="country-div-h2"><img class="country-div-img" src ="${flags.svg}"/> 
+                    ${name.official}</h2>
                     <p><b>Capital:</b> ${capital}</p>
                     <p><b>Population:</b> ${population}</p>
                     <p><b>Languages:</b> ${Object.values(languages)}</p>`)

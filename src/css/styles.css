@@ -18,6 +18,16 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
+.country-div-h2 {
+  display: flex;
+  align-items: center;
+  gap:20px;
+}
+
+.country-div-img {
+  width: 80px;
+}
+
 .country-list {
   list-style: none;
   padding: 0;
@@ -34,3 +44,4 @@ body {
   /* height: 40px; */
 
 }
+
