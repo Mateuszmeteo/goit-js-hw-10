@@ -45,9 +45,9 @@ const searchCountryFunction = e => {
             else if (data.length >=2  && data.length <= 10) {
               const listCountry = data
                 .map(({name, flags}) => 
-                    `<li>
+                    `<li class="country-list-el">
                     <img src="${flags.svg}" style: width=40 /> 
-                    <h3>${name.official}</h3>
+                    <p>${name.official}</p>
                     </li>`)
                 .join('');
                 console.log(listCountry)
